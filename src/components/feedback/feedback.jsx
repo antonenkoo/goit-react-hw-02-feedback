@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './feedback.module.scss';
 
-class Feedback extends React.Component {
+class Feedback extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
+    total: 0,
+    positivePercent: 0,
   };
 
   newValue = el => {
+    this.setState(currState => {
+      return {
+        [el]: this.state[el] + 1,
+      };
+    });
+  };
+
+  countTotalFeedback = el => {
     this.setState({
-      [el]: this.state[el] + 1,
+      total: this.state.total + 1,
+    });
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    this.setState(currState => {
+      return {
+        positivePercent: ((currState.good * 100) / currState.total).toFixed(0),
+      };
     });
   };
 
@@ -23,6 +41,8 @@ class Feedback extends React.Component {
             type="button"
             onClick={event => {
               this.newValue('good');
+              this.countTotalFeedback();
+              this.countPositiveFeedbackPercentage();
             }}
           >
             Good
@@ -31,6 +51,8 @@ class Feedback extends React.Component {
             type="button"
             onClick={event => {
               this.newValue('neutral');
+              this.countTotalFeedback();
+              this.countPositiveFeedbackPercentage();
             }}
           >
             Neutral
@@ -39,6 +61,8 @@ class Feedback extends React.Component {
             type="button"
             onClick={event => {
               this.newValue('bad');
+              this.countTotalFeedback();
+              this.countPositiveFeedbackPercentage();
             }}
           >
             Bad
@@ -50,6 +74,10 @@ class Feedback extends React.Component {
             <li className={styles.statItem}>Good: {this.state.good}</li>
             <li className={styles.statItem}>Neutral: {this.state.neutral}</li>
             <li className={styles.statItem}>Bad: {this.state.bad}</li>
+            <li className={styles.statItem}>Total: {this.state.total}</li>
+            <li className={styles.statItem}>
+              Positive feedback: {this.state.positivePercent}%
+            </li>
           </ul>
         </div>
       </div>

@@ -6,12 +6,30 @@
   margin: 20px;
 }
 
+
 button {
-  background-color: rgb(224, 224, 224);
-  width: 100px;
-  height: 30px;
-  border: 1px;
-  border-radius: 4px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #000000;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 7px #999;
+}
+
+button:hover {
+  background-color: #616161;
+}
+
+button:active {
+  background-color: #616161;
+  box-shadow: 0 3px rgb(139, 139, 139);
+  transform: translateY(4px);
 }
 
 .buttonsBlock {
